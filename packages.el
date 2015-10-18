@@ -31,18 +31,31 @@
     :defer t
     :config
     (progn
-      (defun spacemacs/pixie-eval-and-switch-to-repl ()
+      (defun spacemacs/pixie-eval-last-sexp ()
         "Call `inf-clojure-eval-last-sexp' and switch to REPL buffer in `insert state'"
         (interactive)
         (inf-clojure-eval-last-sexp)
         (inf-clojure-switch-to-repl t)
         (evil-insert-state))
 
+      (defun spacemacs/pixie-eval-region (start end)
+        "Call `inf-clojure-eval-region' and switch to REPL buffer in `insert state'"
+        (interactive "r")
+        (if (region-active-p)
+            (progn
+              (let ((region (buffer-substring-no-properties start end)))
+                (inf-clojure-switch-to-repl t)
+                (inf-clojure-eval-string region)
+                (evil-insert-state)))
+            (message "No region.")))
+
       (evil-leader/set-key-for-mode 'pixie-mode
         ;; REPL
         "msi" 'inf-clojure-switch-to-repl
         "msb" 'inf-clojure-eval-last-sexp
-        "msB" 'spacemacs/pixie-eval-and-switch-to-repl)
+        "msB" 'spacemacs/pixie-eval-last-sexp
+        "msr" 'inf-clojure-eval-region
+        "msR" 'spacemacs/pixie-eval-region)
       )))
 
 ;; For each package, define a function pixie/init-<package-name>
