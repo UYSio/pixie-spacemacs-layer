@@ -1,0 +1,29 @@
+#+TITLE: Pixie contribution layer for Spacemacs
+
+* Table of Contents                                                   :TOC@4:
+ - [[#description][Description]]
+ - [[#install][Install]]
+ - [[#key-bindings][Key Bindings]]
+
+* Description
+
+Adds support for the [[https://github.com/pixie-lang/pixie][Pixie]] programming language.
+
+* Install
+
+To use this contribution add it to your =~/.spacemacs=
+
+#+BEGIN_SRC emacs-lisp
+  (setq-default dotspacemacs-configuration-layers '(pixie))
+#+END_SRC
+
+* Key Bindings
+
+| Key Binding | Description                         |
+|-------------+-------------------------------------|
+| ~SPC m s i~ | Run the REPL                        |
+| ~SPC m s b~ | Eval last sexp                      |
+| ~SPC m s B~ | Eval last sexp and switch to REPL   |
+| ~SPC m s r~ | Eval region                         |
+| ~SPC m s R~ | Eval region and switch to REPL      |
+
